@@ -11,27 +11,42 @@
             <div class="bg-warning card-body">
                 <form class="container">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Full Name" />
+                        <input type="text" id="txtName" maxlength="20" class="form-control" placeholder="Full Name" />
+                        
                         <div class="input-group-text">
                             <i class="bi bi-person-circle"></i>
                         </div>
+                        <div>
+                            <span id="errNameDiv" style="color:red"></span>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="E-mail" />
+                        <input type="text" id="eName" maxlength="10" class="form-control" placeholder="E-mail"/>
+                        
                         <div class="input-group-text">
                             <i class="bi bi-envelope-fill"></i>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" />
-                        <div class="input-group-text">
-                            <i class="bi bi-shield-lock"></i>
+                        <div>
+                            <span id="errEmailDiv" style="color:red"></span>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Confirm Password" />
+                        <input type="password" id="pass1" class="form-control" placeholder="Password" />
+                        
+                        <div class="input-group-text">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <div>
+                            <span id="errPassDiv1" style="color:red"></span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="pass2" class="form-control" placeholder="Confirm Password" />
                         <div class="input-group-text">
                             <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <div>
+                            <span id="errPassDiv2" style="color:red"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -40,9 +55,9 @@
                             <label class="form-check-label">I agree</label>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-primary btn-block">
-                                Save
-                            </button>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-block" onclick="SaveRecord()">
+                                Submit
+                            </a>
                         </div>
                     </div>
 
@@ -50,5 +65,73 @@
             </div>
         </div>
         </div>
+        <environment include="Development">
+            <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/jquery-validate/jquery.validate.js"></script>
+        <script src="~/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        </environment>
+    
+        <environment include="Development">
+            <script src="~/lib/jquery/jquery.min.js"></script>
+        </environment>
+    <script src="~/lib/jquery/jquery.js"></script>
+     <script type="text/javascript">
+
+         function SaveRecord() {
+             if (!ValidateInfo()) {
+                 return false;
+             }
+
+             alert("Validate the form Carefully");
+         }
+         function ValidateInfo() {
+             var result = true;
+
+
+             if ($('#txtName').val().trim().length == 0) {
+                 $("#errNameDiv").show();
+                 $("#errNameDiv").text('Your Name is Required');
+                 result = false;
+             }
+             else {
+                 $("#errNameDiv").hide();
+             }
+
+            if ($('#eName').val().trim().length == 0) {
+                $("#errEmailDiv").show();
+                $("#errEmailDiv").text('Your Email is Required');
+                result = false;
+            }
+            else {
+                $("#errEmailDiv").hide();
+            }
+
+            if ($('#pass1').val().trim().length == 0) {
+                $("#errPassDiv1").show();
+                $("#errPassDiv1").text('Your Password is Required');
+                result = false;
+            }
+            else {
+                $("#errPassDiv1").hide();
+            }
+
+            if ($('#pass2').val().trim().length == 0) {
+                $("#errPassDiv2").show();
+                $("#errPassDiv2").text('Your Password is Confirmed');
+                result = false;
+            }
+            else {
+                $("#errPassDiv2").hide();
+            }
+
+             return result;
+         }
+
+         
+     </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   
     </body>
 </html>
